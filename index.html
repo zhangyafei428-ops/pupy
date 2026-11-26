@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>友谊相处模式确诊测试｜成年人友情诊断书</title>
+  <style>
+    /* =========================================================================
+       零外部依赖原生样式：新粗野主义（Neo-Brutalism）复古医疗确诊单风格
+       ========================================================================= */
+    :root {
+      --bg-page: #EFECE6;
+      --bg-paper: #FAF8F5;
+      --ink: #18181B;
+      --ink-muted: #52525B;
+      --yellow: #FACC15;
+      --red: #EF4444;
+      --mint: #34D399;
+      --pink: #F472B6;
+      --sky: #38BDF8;
+      --border: 2px solid #18181B;
+      --shadow: 4px 4px 0 #18181B;
+      --shadow-sm: 2.5px 2.5px 0 #18181B;
+      --shadow-lg: 5px 5px 0 #18181B;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background-color: var(--bg-page);
+      background-image:
+        linear-gradient(to right, rgba(24, 24, 27, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(24, 24, 27, 0.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+      line-height: 1.5;
+    }
+
+    .font-mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    /* 手机端居中容器 */
+    .app-shell {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 16px 14px 48px;
+      position: relative;
+    }
+
+    /* 通用粗野主义卡片与按钮 */
+    .neo-card {
+      background: var(--bg-paper);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .neo-subcard {
+      background: #FFFFFF;
+      border: var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+    }
+
+    .neo-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      border: var(--border);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-md);
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--ink);
+      background: #FFFFFF;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    .neo-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .neo-btn-sm {
+      width: auto;
+      padding: 7px 12px;
+      font-size: 12px;
+      box-shadow: var(--shadow-sm);
+      border-radius: 9px;
+    }
+
+    .btn-yellow { background: var(--yellow); }
+    .btn-mint { background: var(--mint); }
+    .btn-red { background: var(--red); color: #FFFFFF; }
+    .btn-ink { background: var(--ink); color: var(--bg-paper); }
+    .btn-pink { background: #FBCFE8; }
+
+    /* 标签与徽章 */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 3px 9px;
+      border-radius: 7px;
+      border: 1.5px solid var(--ink);
+      background: #FFFFFF;
+      white-space: nowrap;
+    }
+    .badge-ink { background: var(--ink); color: var(--yellow); border-color: var(--ink); }
+    .badge-yellow { background: var(--yellow); color: var(--ink); }
+    .badge-mint { background: var(--mint); color: var(--ink); }
+    .badge-red { background: var(--red); color: #FFFFFF; }
+
+    /* 顶部栏 */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    /* 输入框 */
+    .neo-input {
+      width: 100%;
+      background: #FFFFFF;
+      border: var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      outline: none;
+      transition: background-color 0.15s ease;
+    }
+    .neo-input::placeholder {
+      color: #A1A1AA;
+      font-weight: 500;
+    }
+    .neo-input:focus {
+      background: #FEFCE8;
+    }
+
+    /* 红色印章 */
+    .stamp-circle {
+      position: absolute;
+      top: 52px;
+      right: 12px;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      border: 3px solid var(--red);
+      box-shadow: inset 0 0 0 2px var(--bg-paper), inset 0 0 0 3.5px var(--red);
+      color: var(--red);
+      background: rgba(250, 248, 245, 0.88);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      transform: rotate(-14deg);
+      pointer-events: none;
+      z-index: 5;
+    }
+    .stamp-circle .st-top { font-size: 10px; }
+    .stamp-circle .st-mid {
+      font-size: 14px;
+      letter-spacing: 2px;
+      border-top: 2px solid var(--red);
+      border-bottom: 2px solid var(--red);
+      margin: 2px 0;
+      padding: 0 3px;
+    }
+    .stamp-circle .st-bot { font-size: 9px; }
+
+    .stamp-rect {
+      display: inline-block;
+      border: 3px solid var(--red);
+      color: var(--red);
+      background: rgba(239, 68, 68, 0.06);
+      border-radius: 10px;
+      padding: 8px 16px;
+      transform: rotate(-3.5deg);
+      text-align: center;
+    }
+
+    /* 进度条 */
+    .progress-track {
+      width: 100%;
+      height: 15px;
+      background: #FFFFFF;
+      border: var(--border);
+      border-radius: 999px;
+      padding: 2px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--mint);
+      border-right: 2px solid var(--ink);
+      transition: width 0.25s ease;
+    }
+
+    /* 答题选项按钮 */
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      background: #FFFFFF;
+      border: var(--border);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.12s ease;
+    }
+    .option-btn:active,
+    .option-btn.selected {
+      background: var(--yellow);
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .option-letter {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--bg-paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 13px;
+      margin-top: 1px;
+    }
+    .option-text {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    /* 撕纸虚线与半圆缺口 */
+    .ticket-divider {
+      border-top: 2px dashed var(--ink);
+      margin-top: 18px;
+      padding-top: 14px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .ticket-divider::before,
+    .ticket-divider::after {
+      content: "";
+      position: absolute;
+      top: -9px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg-page);
+      border: 2px solid var(--ink);
+    }
+    .ticket-divider::before { left: -27px; }
+    .ticket-divider::after { right: -27px; }
+
+    /* 条形码视觉 */
+    .barcode {
+      height: 26px;
+      width: 108px;
+      opacity: 0.88;
+      background-image: repeating-linear-gradient(
+        90deg,
+        #18181B 0px, #18181B 2px,
+        transparent 2px, transparent 4px,
+        #18181B 4px, #18181B 7px,
+        transparent 7px, transparent 9px,
+        #18181B 9px, #18181B 10px,
+        transparent 10px, transparent 13px,
+        #18181B 13px, #18181B 16px,
+        transparent 16px, transparent 18px
+      );
+    }
+
+    /* 能量条与指标条 */
+    .axis-row { margin-bottom: 9px; }
+    .axis-row:last-child { margin-bottom: 0; }
+    .axis-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .axis-track {
+      width: 100%;
+      height: 10px;
+      background: var(--bg-paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .axis-fill {
+      height: 100%;
+      border-right: 1.5px solid var(--ink);
+      transition: width 0.45s ease;
+    }
+
+    /* 网格与间距辅助类 */
+    .stack-sm > * + * { margin-top: 10px; }
+    .stack-md > * + * { margin-top: 14px; }
+    .stack-lg > * + * { margin-top: 18px; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .dual-vs {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 8px;
+    }
+    .tag-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .quote-box {
+      background: #FEF9C3;
+      border: var(--border);
+      border-radius: var(--radius-md);
+      padding: 13px;
+    }
+    .rx-box {
+      background: var(--ink);
+      color: var(--bg-paper);
+      border-radius: var(--radius-md);
+      padding: 13px;
+    }
+
+    /* 模态弹窗 */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(24, 24, 27, 0.62);
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-panel {
+      width: 100%;
+      max-width: 390px;
+      background: var(--bg-paper);
+      border: 2.5px solid var(--ink);
+      box-shadow: 6px 6px 0 var(--ink);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: fadeSlide 0.22s ease forwards;
+    }
+
+    /* Toast 轻提示 */
+    .toast {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translate(-50%, -14px);
+      z-index: 80;
+      width: 90%;
+      max-width: 360px;
+      background: var(--ink);
+      color: var(--bg-paper);
+      border: 2px solid var(--ink);
+      box-shadow: var(--shadow-sm);
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* 动画 */
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in {
+      animation: fadeSlide 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes stampDrop {
+      0% { opacity: 0; transform: scale(1.7) rotate(-26deg); }
+      75% { opacity: 1; transform: scale(0.92) rotate(-12deg); }
+      100% { opacity: 0.94; transform: scale(1) rotate(-14deg); }
+    }
+    .animate-stamp {
+      animation: stampDrop 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+    }
+    @keyframes shakeError {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .shake-error {
+      animation: shakeError 0.32s ease;
+      border-color: var(--red) !important;
+      background: #FEF2F2 !important;
+    }
+
+    .error-msg {
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 900;
+      margin-top: 6px;
+      display: none;
+    }
+    .error-msg.show {
+      display: block;
+    }
+
+    .text-link {
+      background: none;
+      border: none;
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+    <main id="app-root"></main>
+  </div>
+
+  <!-- 全局 Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- 通用弹窗（兑换码解锁 / 邀请合盘） -->
+  <div id="modal-backdrop" class="modal-backdrop" onclick="handleBackdropClick(event)">
+    <div id="modal-panel" class="modal-panel"></div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. 小红书预设 100 个兑换码 + 店长专属测试码 + localStorage 键名
+    // =========================================================================
+    const VALID_CODES = new Set([
+      'YY8A2K','YY3B9M','YY7C4P','YY5D6R','YY9E2T','YY4F8W','YY6G3X','YY2H7Y','YY8J5Z','YY3K9A',
+      'YY7M2B','YY5N4C','YY9P6D','YY4Q8E','YY6R3F','YY2S7G','YY8T5H','YY3U9J','YY7V2K','YY5W4M',
+      'YY9X6N','YY4Y8P','YY6Z3Q','YY2A7R','YY8B5S','YY3C9T','YY7D2U','YY5E4V','YY9F6W','YY4G8X',
+      'YY6H3Y','YY2J7Z','YY8K5A','YY3M9B','YY7N2C','YY5P4D','YY9Q6E','YY4R8F','YY6S3G','YY2T7H',
+      'YY8U5J','YY3V9K','YY7W2M','YY5X4N','YY9Y6P','YY4Z8Q','YY6A3R','YY2B7S','YY8C5T','YY3D9U',
+      'YY7E2V','YY5F4W','YY9G6X','YY4H8Y','YY6J3Z','YY2K7A','YY8M5B','YY3N9C','YY7P2D','YY5Q4E',
+      'YY9R6F','YY4S8G','YY6T3H','YY2U7J','YY8V5K','YY3W9M','YY7X2N','YY5Y4P','YY9Z6Q','YY4A8R',
+      'YY6B3S','YY2C7T','YY8D5U','YY3E9V','YY7F2W','YY5G4X','YY9H6Y','YY4J8Z','YY6K3A','YY2M7B',
+      'YY8N5C','YY3P9D','YY7Q2E','YY5R4F','YY9S6G','YY4T8H','YY6U3J','YY2V7K','YY8W5M','YY3X9N',
+      'YY7Y2P','YY5Z4Q','YY9A6R','YY4B8S','YY6C3T','YY2D7U','YY8E5V','YY3F9W','YY7G2X','YY5H4Y'
+    ]);
+    const BOSS_CODE = 'BOSS888';
+    const STORAGE_UNLOCK_KEY = 'frd_diag_unlocked_v1';
+    const STORAGE_BOSS_KEY = 'frd_diag_boss_v1';
+    const STORAGE_CODE_KEY = 'frd_diag_code_v1';
+
+    // =========================================================================
+    // 2. 15 道单人网感测试题（严格对齐三轴计分）
+    // =========================================================================
+    const SINGLE_QUESTIONS = [
+      {
+        id: 1,
+        text: '周末好不容易约好两人贴贴探店，临出门前对方突然发消息：“我顺便叫了个同事一起，你不介意吧？”',
+        options: [
+          { label: 'A', text: '嘴上回“不介意呀”，心里已经把白眼翻到后脑勺：谁要跟陌生人搞团建啊，我的专属局毁了！', pole: 'A' },
+          { label: 'B', text: '无所谓，多个人还能多点两个菜、帮忙分担聊天 KPI，只要她俩别冷落我就行。', pole: 'B' }
+        ]
+      },
+      {
+        id: 2,
+        text: '聚会时，好朋友当众开了个玩笑，刚好精准踩碎了你平时最在意的痛点：',
+        options: [
+          { label: 'A', text: '表面跟着干笑两声维持体面，心里已经在小本本上给这段友情判了缓刑。', pole: 'Y' },
+          { label: 'B', text: '当场收起假笑直接开麦：“打住，这个不好笑，再开我真急眼了啊。”', pole: 'X' }
+        ]
+      },
+      {
+        id: 3,
+        text: '你兴冲冲发了三段 60 秒语音分享天大喜事，对方隔了半天只回了一个冷冰冰的“哈哈挺好的”：',
+        options: [
+          { label: 'A', text: '热情瞬间被一盆冰水浇灭，开始复盘自己是不是太话痨、像个没边界感的显眼包。', pole: '1' },
+          { label: 'B', text: '肯定在忙着当牛马没空打字呗，反正我自己说爽了就行，管她回啥。', pole: '2' }
+        ]
+      },
+      {
+        id: 4,
+        text: '和关系很铁的朋友已经整整两周没发过微信，聊天框安静得像坟墓，你通常会：',
+        options: [
+          { label: 'A', text: '毫无感觉，各自在人生副本里打怪挺好的，两周而已，半年不联都是常态。', pole: 'B' },
+          { label: 'B', text: '心里开始犯嘀咕，赶紧挑个沙雕视频或表情包发过去，强行刷一波存在感。', pole: 'A' }
+        ]
+      },
+      {
+        id: 5,
+        text: '热闹的聚会散场，深夜打车回家的路上，你的大脑通常在自动播放什么？',
+        options: [
+          { label: 'A', text: '逐帧回放刚才的社死瞬间：我那句话是不是太冒犯了？她刚才皱眉是不是烦我了？', pole: '1' },
+          { label: 'B', text: '复盘刚才哪道菜最好吃、明天早饭吃啥，到家卸妆倒头就睡，根本没空想有的没的。', pole: '2' }
+        ]
+      },
+      {
+        id: 6,
+        text: '你借给好朋友一样东西，过了大半年她绝口不提要还，而你下周真要用了：',
+        options: [
+          { label: 'A', text: '直接微信开麦：“宝，我那个 XX 下周要救命用，你看啥时候方便我去劫个道？”', pole: 'X' },
+          { label: 'B', text: '纠结怎么开口才不显得小气，甚至默默打开购物软件，准备花钱再买个新的算了。', pole: 'Y' }
+        ]
+      },
+      {
+        id: 7,
+        text: '你 P 了两小时图才发的朋友圈，最好朋友没赞没评，转头却给你们的共同好友点了赞：',
+        options: [
+          { label: 'A', text: '瞬间警铃大作：她是不是故意忽略我？我俩的感情是不是出现裂痕了？', pole: 'A' },
+          { label: 'B', text: '压根没注意谁赞了谁，或者觉得大数据把我的朋友圈吞了，无所谓。', pole: 'B' }
+        ]
+      },
+      {
+        id: 8,
+        text: '你妆都化好了，朋友临时放你鸽子，而且这已经是这个月第二次了：',
+        options: [
+          { label: 'A', text: '微笑打字“没事哒你先忙~”，同时在心里把她拉进“永不主动约饭”黑名单。', pole: 'Y' },
+          { label: 'B', text: '直接回怼：“姐，我粉底液很贵的！下次再这么临时爽约，这顿饭你得请。”', pole: 'X' }
+        ]
+      },
+      {
+        id: 9,
+        text: '最近聊天，你发现好朋友回消息突然没了波浪号、感叹号和沙雕表情包，只剩干巴巴的文字：',
+        options: [
+          { label: 'A', text: '完全没察觉到标点符号的玄学，只要不是骂我，我就默认一切太平。', pole: '2' },
+          { label: 'B', text: '瞬间化身福尔摩斯，倒翻三天聊天记录逐字排查：我到底哪句话惹这位祖宗不高兴了？', pole: '1' }
+        ]
+      },
+      {
+        id: 10,
+        text: '因为一点小事和朋友闹了明显误会，两个人的气氛僵得能冻死企鹅：',
+        options: [
+          { label: 'A', text: '最烦冷战憋内伤，哪怕拉下老脸也要发小作文把话摊开讲死，痛快解决。', pole: 'X' },
+          { label: 'B', text: '觉得解释起来太耗电了，先冷着吧，能糊弄过去最好，过不去就顺其自然散伙。', pole: 'Y' }
+        ]
+      },
+      {
+        id: 11,
+        text: '你遇到一件气到原地爆炸的破事，但知道好朋友最近正加班到灵魂出窍：',
+        options: [
+          { label: 'A', text: '还是忍不住疯狂输出吐槽，哪怕她半夜才回，先倒进她对话框里我心里才踏实。', pole: 'A' },
+          { label: 'B', text: '咽回去自己慢慢消化，等哪天她彻底闲下来见面干饭时，再当段子轻描淡写提一嘴。', pole: 'B' }
+        ]
+      },
+      {
+        id: 12,
+        text: '在一段友情里，最让你觉得“精疲力尽、不如退网”的事情是：',
+        options: [
+          { label: 'A', text: '天天揣摩对方的微表情和潜台词，生怕自己哪步没做周全让对方受了委屈。', pole: '1' },
+          { label: 'B', text: '应付没完没了的玻璃心、表面客套和需要靠猜的弯弯绕，有话不能直说吗？', pole: '2' }
+        ]
+      },
+      {
+        id: 13,
+        text: '在你心里，最顶级、最舒服的“神仙友情”应该是哪种打开方式？',
+        options: [
+          { label: 'A', text: '平时互不打扰、各过各的，但真遇上事或者想喝酒时，一个电话随时能摇来。', pole: 'B' },
+          { label: 'B', text: '彼此生活里的“绝对第一顺位”，大事小事、吐槽发疯，必须第一时间互相同步。', pole: 'A' }
+        ]
+      },
+      {
+        id: 14,
+        text: '发现一段处了很多年的老友情正在慢慢变质，现在聊天像在做阅读理解一样尴尬：',
+        options: [
+          { label: 'A', text: '找机会认真聊透一次，就算最后真的要散，也要给这么多年的感情一个体面交代。', pole: 'X' },
+          { label: 'B', text: '谁都别捅破那层窗户纸，默契地越聊越少，体面地退回彼此的“点赞之交”。', pole: 'Y' }
+        ]
+      },
+      {
+        id: 15,
+        text: '某天突然发现，一个曾经很亲密的朋友毫无征兆地把你单删了，你的第一反应是：',
+        options: [
+          { label: 'A', text: '懵逼两秒，骂一句“有病吧这人”，拉黑删除一条龙，该吃吃该喝喝迅速翻篇。', pole: '2' },
+          { label: 'B', text: '极度破防和委屈，反复内耗自己到底做错了什么，好长一段时间都走不出来。', pole: '1' }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // 3. 8 种完整网感确诊单数据
+    // =========================================================================
+    const PERSONALITIES = {
+      AX1: {
+        code: 'AX1',
+        name: '嘴硬心碎大醋精',
+        emoji: '🍋',
+        bg: '#FBCFE8',
+        ratio: '11.8%',
+        keywords: ['放狠话后秒哭', '第一顺位执念', '哄两句就好'],
+        diagnosis: '“吵架时嘴硬得像块花岗岩，挂完电话三分钟就躲在被窝里刷手机：她怎么还不来哄我，她是不是真不爱我了？”',
+        daily: [
+          { title: '顶级吃醋不承认', desc: '看到好朋友跟别人贴贴、没第一时间回你消息，嘴上冷笑“哦，你俩真好”，心里已经开始写八百字绝交小作文。' },
+          { title: '一碰就碎的战神', desc: '每次放狠话说“算了以后别联系了”，其实潜台词都是“快来抱我一下，给我个台阶我就下”。' }
+        ],
+        bestMatch: { name: '已读乱回反内耗王', desc: '根本不吃你放狠话那套，直接一句大实话把你逗笑，专治你的各种拧巴' },
+        worstMatch: { name: '社交已死顶级淡人', desc: '你越发疯求关注，她越想连夜买站票逃离地球，最后你气死、她累死' },
+        prescription: '下次吃醋直接发一句“我酸了，快哄我”，比你阴阳怪气三天管用一万倍。'
+      },
+      AX2: {
+        code: 'AX2',
+        name: '没心没肺快乐傻狗',
+        emoji: '🐶',
+        bg: '#FACC15',
+        ratio: '10.5%',
+        keywords: ['嘴比脑子快', '隔夜就失忆', '分享欲炸弹'],
+        diagnosis: '“你以为你们昨天吵完已经翻篇了，其实朋友还在深夜内耗；你以为你在开玩笑，其实你已经精准踩碎了对方的天灵盖。”',
+        daily: [
+          { title: '单细胞直球选手', desc: '看到搞笑视频必转发、吃到好吃的必按头安利，对朋友掏心掏肺，但脑回路直得像高速公路，完全听不懂人家的言外之意。' },
+          { title: '无意识得罪大师', desc: '说话不过大脑，经常一句“你今天看起来好累哦”把天聊死，自己还一脸无辜问“你怎么不说话了”。' }
+        ],
+        bestMatch: { name: '天生操心老妈子', desc: '她超吃你这套热乎劲，你负责傻乐，她负责给你善后，绝配' },
+        worstMatch: { name: '微死感体面判官', desc: '你踩完她十个雷区还傻笑，她表面笑嘻嘻，背地里已经把你送进了黑名单' },
+        prescription: '吐槽前把话在嘴里过三秒，遇到突然安静的朋友，别问“你咋了”，直接请她喝杯奶茶保平安。'
+      },
+      AY1: {
+        code: 'AY1',
+        name: '微死感体面判官',
+        emoji: '⚖️',
+        bg: '#BAE6FD',
+        ratio: '14.2%',
+        keywords: ['表面嘻嘻心里已埋', '静音扣分', '绝不撕破脸'],
+        diagnosis: '“你从不跟朋友大吵大闹，因为在你心里，只要这段关系需要你开口讲道理，它就已经进 ICU 了。”',
+        daily: [
+          { title: '心里装了个计分板', desc: '迟到扣 10 分、敷衍扣 20 分、开过分玩笑直接扣 50 分。表面上“哈哈没事啦”，等分扣完的那天，直接把对方单方面判处“社交死刑”。' },
+          { title: '高级微死感', desc: '朋友以为你们还是好闺蜜，其实你在脑子里已经独自走完了“委屈—理解—算了—去你的”全套流程，现在回她消息纯属人道主义关怀。' }
+        ],
+        bestMatch: { name: '冷血反矫情达人', desc: '她一眼就能看穿你没说出口的委屈，还能帮你把那些不好意思骂出口的脏话全骂了' },
+        worstMatch: { name: '没心没肺快乐傻狗', desc: '她随口一句没过脑子的玩笑，够你带着微死感在深夜复盘三个晚上' },
+        prescription: '扣分扣到 60 分时就试着发一次小脾气吧，有时候对方真不是坏，单纯就是缺心眼。'
+      },
+      AY2: {
+        code: 'AY2',
+        name: '天生操心老妈子',
+        emoji: '🧺',
+        bg: '#FED7AA',
+        ratio: '15.6%',
+        keywords: ['顶级软柿子', '免费情绪垃圾桶', '委屈自己成全别人'],
+        diagnosis: '“出门你做攻略、点菜你顾忌口、吵架你先递台阶——你到底是在交朋友，还是在免费做慈善养大儿？”',
+        daily: [
+          { title: '拒绝别人像在犯罪', desc: '朋友临时放鸽子、让你帮忙干白工，你心里已经骂了一百句，打字出来的却是“没事没事，你先忙，我都可以~”。' },
+          { title: '自我PUA大师', desc: '只要对方稍微冷淡一点，你就开始反思“是不是我哪里没照顾好她”，把所有的委屈都往自己肚子里吞。' }
+        ],
+        bestMatch: { name: '没心没肺快乐傻狗', desc: '她不跟你玩心眼，还会把你的好大声夸出来，让你觉得自己的付出终于被看见了' },
+        worstMatch: { name: '冷血反矫情达人', desc: '她语气一冷、说话一重，你立刻觉得自己做错事了，相处起来像在见教导主任' },
+        prescription: '本周 KPI：对朋友说一次“今天我不想吃这个”或“我现在没空”。记住，发疯一次，寿命加十年。'
+      },
+      BX1: {
+        code: 'BX1',
+        name: '冷血反矫情达人',
+        emoji: '🕶️',
+        bg: '#DDD6FE',
+        ratio: '8.4%',
+        keywords: ['专治恋爱脑', '嘴毒心稳', '边界感焊死'],
+        diagnosis: '“你这张嘴虽然像开过光一样毒，但朋友真掉坑里时，你是唯一一个一边骂她傻、一边把她从坑里拉出来的狠人。”',
+        daily: [
+          { title: '人形绿茶检测仪', desc: '谁在画饼、谁在装可怜、谁在占便宜，你三秒看穿。懒得陪演表面闺蜜情，谁敢越界，你直接礼貌且冷酷地把门焊死。' },
+          { title: '拒绝无效安慰', desc: '朋友找你哭诉渣男，别人都在哄，只有你冷静分析：“他就是不爱你，还不分留着过清明吗？”' }
+        ],
+        bestMatch: { name: '微死感体面判官', desc: '你懂她的欲言又止，她服你的清醒通透，你俩凑一块儿就是顶级智囊团' },
+        worstMatch: { name: '嘴硬心碎大醋精', desc: '她只想让你无脑偏爱和哄她，你却在给她做逻辑复盘，三句话就能点燃核弹' },
+        prescription: '朋友找你吐槽时，先忍住别当人生导师，跟着她一起骂对方三分钟，再掏出你的神仙方案。'
+      },
+      BX2: {
+        code: 'BX2',
+        name: '已读乱回反内耗王',
+        emoji: '⚡',
+        bg: '#34D399',
+        ratio: '12.1%',
+        keywords: ['精神状态遥遥领先', '有事直接开麦', '爽文女主'],
+        diagnosis: '“别人交朋友像在演宫斗剧，你交朋友像在看喜剧片——谁敢跟你阴阳怪气，你直接当场问她：你说话怎么夹枪带棒的？”',
+        daily: [
+          { title: '天然免疫情绪勒索', desc: '什么冷战、猜心思、发仅你可见的朋友圈，在你眼里全都是无效攻击。能处就痛快处，处不来就体面散伙，绝不浪费一秒钟内耗。' },
+          { title: '无痛社交天花板', desc: '就算一个月没联系，见面三秒照样互损；有不爽当场讲开，讲完继续干饭，和你当朋友省心到像开了环境降噪。' }
+        ],
+        bestMatch: { name: '嘴硬心碎大醋精', desc: '你的大直球和超稳情绪，刚好能把她那点玻璃心治得服服帖帖' },
+        worstMatch: { name: '社交已死顶级淡人', desc: '你觉得是正常直爽互动，在她看来你活力太猛，聊十分钟她电量就见底了' },
+        prescription: '你本身已经是友谊界的顶级稀缺资源了，偶尔记得主动戳一下那些慢热的老朋友，她们其实超想你。'
+      },
+      BY1: {
+        code: 'BY1',
+        name: '社交已死顶级淡人',
+        emoji: '🪫',
+        bg: '#E4E4E7',
+        ratio: '13.9%',
+        keywords: ['电量仅剩1%', '随时准备跑路', '礼貌性已死'],
+        diagnosis: '“你不是讨厌朋友，你只是社交电池严重老化——出门聚会两小时，回家需要躺尸两天才能恢复人形。”',
+        daily: [
+          { title: '热爱独处的微死淡人', desc: '微信消息能意念回复就绝不打字，约出门被放鸽子时，嘴上说“好可惜呀”，心里其实在放烟花庆祝“太好了不用洗头了”。' },
+          { title: '无声筛选机制', desc: '对细节和分寸极度敏感，一旦觉得某个人太吵、太爱管闲事，你不会吵架，只会自动启动“礼貌的已读不回”，慢慢从对方世界蒸发。' }
+        ],
+        bestMatch: { name: '半年诈尸卡皮巴拉', desc: '互不催回消息、互不道德绑架，一个月见一次面，各自安静发光，爽翻' },
+        worstMatch: { name: '嘴硬心碎大醋精', desc: '她那种夺命连环问“你是不是不在乎我了”，能让你当场灵魂出窍' },
+        prescription: '电量归零时直接发一句“最近累瘫了，关机躺两天”，比直接人间蒸发更能保住你仅存的几个真朋友。'
+      },
+      BY2: {
+        code: 'BY2',
+        name: '半年诈尸卡皮巴拉',
+        emoji: '🍊',
+        bg: '#D9F99D',
+        ratio: '13.5%',
+        keywords: ['失踪人口', '情绪稳如老狗', '叫吃饭立刻活过来'],
+        diagnosis: '“你对待友情的态度主打一个‘你在我欢迎，你走我随缘’，哪怕半年没说过话，只要对方问一句吃不吃火锅，你立刻原地诈尸。”',
+        daily: [
+          { title: '几乎没有情绪雷区', desc: '别人秒不秒回、点不点赞、聚会叫没叫你，在你这儿全都是浮云。只要不借钱不拉人头，你在心里永远把对方当铁子。' },
+          { title: '人间顶级树洞', desc: '因为你自己从不内耗，情绪稳得像只泡温泉的水豚，所以朋友每次发疯崩溃时，最喜欢躲到你这里来充电。' }
+        ],
+        bestMatch: { name: '社交已死顶级淡人', desc: '你俩把“君子之交淡如水”玩到了极致，半年不联系见面依旧亲如一家' },
+        worstMatch: { name: '嘴硬心碎大醋精', desc: '你的佛系和慢半拍，在她眼里约等于“冷暴力”，随时能把她气成河豚' },
+        prescription: '偶尔对那些比较敏感的朋友发个“想你啦”或点个赞，对你只是举手之劳，但能让她们开心一整周。'
+      }
+    };
+
+    // =========================================================================
+    // 4. 免费好友 5 题合盘题目 & 6 组专属吐槽 + 4 套通用模板
+    // =========================================================================
+    const DUAL_QUESTIONS = [
+      {
+        id: 1,
+        getText: (host) => `如果【${host}】连续两周没给你发过一条微信，你的第一反应是：`,
+        options: [
+          { label: 'A', text: '心里犯嘀咕，赶紧发个沙雕视频试探一下：“这货是不是交新朋友把我忘了？”', value: 'A' },
+          { label: 'B', text: '毫无察觉，各自忙着当牛马挺好的，半年不联系我都觉得咱俩昨天刚吃过饭。', value: 'B' }
+        ]
+      },
+      {
+        id: 2,
+        getText: (host) => `要是【${host}】当面开了一个让你很不舒服的玩笑，你会怎么处理？`,
+        options: [
+          { label: 'A', text: '当场收起假笑直接开麦：“打住啊，这玩笑一点不好笑，再说我急眼了。”', value: 'X' },
+          { label: 'B', text: '表面“哈哈哈哈”糊弄过去，心里已经默默给这段友谊扣了 30 分。', value: 'Y' }
+        ]
+      },
+      {
+        id: 3,
+        getText: (host) => `你兴冲冲给【${host}】发了一大段语音吐槽，对方隔了三小时只回了一个“哈哈”，你会：`,
+        options: [
+          { label: 'A', text: '瞬间下头加内耗，开始复盘自己是不是太话痨、打扰到人家了。', value: '1' },
+          { label: 'B', text: '肯定在忙着拉屎或开会呗，反正我说爽了就行，管她回啥。', value: '2' }
+        ]
+      },
+      {
+        id: 4,
+        getText: (host) => `深夜两点，【${host}】突然给你发来一句“睡了吗”，你脑子里闪过的第一个念头是：`,
+        options: [
+          { label: 'A', text: '卧槽出大事了！瞬间清醒，准备接电话听八卦或连夜去捞人。', value: '过命交情' },
+          { label: 'B', text: '完了，肯定又要找我倾倒情绪垃圾或者借钱，假装睡着明早再回。', value: '塑料保命' }
+        ]
+      },
+      {
+        id: 5,
+        getText: (host) => `如果让你和【${host}】单独去自由行 5 天，你觉得第几天会在心里偷偷骂对方？`,
+        options: [
+          { label: 'A', text: '根本不会骂，我俩纯纯神仙搭子，甚至能一起把别人都骂一遍。', value: '99' },
+          { label: 'B', text: '第 2 天行程一乱就开始微死，第 4 天已经想各自买票提前回国。', value: '35' }
+        ]
+      }
+    ];
+
+    const SIGNATURE_PAIRS = {
+      'AX1-BY1': {
+        stamp: '她逃她追，插翅难飞局',
+        survivalBase: 35,
+        coldWarBase: 96,
+        crazyBase: 58,
+        diagnosis: '一个发消息要求三秒内回复且带波浪号，一个手机常年静音、回复全靠意念。醋精每天都在问“你是不是不在乎我了”，淡人每天都在想“我能不能连夜移民火星”。',
+        victim: '醋精委屈到连夜写小作文，淡人累到魂魄离体。',
+        bottomLine: '醋精少查岗，淡人回消息时麻烦多加两个感叹号保平安。'
+      },
+      'AX1-BX2': {
+        stamp: '一物降一物，专治玻璃心',
+        survivalBase: 92,
+        coldWarBase: 16,
+        crazyBase: 90,
+        diagnosis: '醋精刚放完狠话准备开始演苦情戏，反内耗王直接一句“行，那明天火锅我自己去吃了，记得给我发红包”把戏台子掀了。没有反内耗王接不住的发疯，也没有醋精扛得住的大实话。',
+        victim: '谁也没委屈，一个负责作，一个负责笑嘻嘻地治。',
+        bottomLine: '锁死，千万别把你俩放出去祸害别人了。'
+      },
+      'BY1-BY2': {
+        stamp: '微信列表里的活化石',
+        survivalBase: 91,
+        coldWarBase: 9,
+        crazyBase: 45,
+        diagnosis: '你俩的聊天记录翻一页就是去年冬天，但谁也没觉得关系变淡。约饭被放鸽子时，两人在各自家里同时长舒一口气：“太好了，今天又不用洗头了！”',
+        victim: '只有微信服务器委屈，白养了你俩这么久一条消息不发。',
+        bottomLine: '记得每年至少见一次面，互相确认一下对方还活着就行。'
+      },
+      'AY1-BX1': {
+        stamp: '人间清醒审判庭',
+        survivalBase: 89,
+        coldWarBase: 24,
+        crazyBase: 84,
+        diagnosis: '别人聚会是叙旧，你俩聚会是复盘全人类。体面判官负责收集槽点和微笑观察，反矫情达人负责直接开麦精准点杀。谁要是敢占你俩便宜，连夜就能被你们分析到社死。',
+        victim: '你们共同讨厌的那个倒霉蛋最委屈。',
+        bottomLine: '绝配，适合合伙搞钱，或者一起开个吐槽播客。'
+      },
+      'AX2-AY1': {
+        stamp: '一个在傻乐，一个在判刑',
+        survivalBase: 38,
+        coldWarBase: 88,
+        crazyBase: 62,
+        diagnosis: '快乐傻狗嘴比脑子快，一顿饭精准踩碎判官八个雷区还问“你怎么不吃呀”；体面判官表面“哈哈没事哒”，背地里已经在脑海里把傻狗拉黑了三百回。',
+        victim: '判官憋出内伤，傻狗到绝交那天都不知道自己错哪儿了。',
+        bottomLine: '判官有不爽请直接拍桌子骂人，别指望傻狗能看懂你的微表情。'
+      },
+      'AX2-AY2': {
+        stamp: '顶级慈母和她的快乐大儿',
+        survivalBase: 95,
+        coldWarBase: 14,
+        crazyBase: 92,
+        diagnosis: '出门旅游，老妈子提前一个月做好 Excel 攻略、带齐充电宝和肠胃药；快乐傻狗只带了一张嘴和满格情绪价值，一路狂夸“宝你太厉害了”。一个愿操心，一个真给情绪价值。',
+        victim: '老妈子累并快乐着，傻狗纯快乐着。',
+        bottomLine: '傻狗记得多请老妈子喝奶茶、主动买单，别把妈累跑了。'
+      }
+    };
+
+    // =========================================================================
+    // 5. 应用状态与存储读取
+    // =========================================================================
+    const state = {
+      view: 'home', // home | quiz | result | dualIntro | dualQuiz | dualResult | gallery
+      unlocked: false,
+      isBoss: false,
+      userName: '',
+      answers: [],
+      currentQ: 0,
+      resultCode: 'AY1',
+      axisCounts: { A: 3, B: 2, X: 1, Y: 4, '1': 4, '2': 1 },
+      diagNo: '',
+      dualHost: { name: '神秘搭子', code: 'AY1' },
+      dualGuest: { name: '', code: 'BX1', trustTag: '过命交情', survivalPick: '99' },
+      dualAnswers: [],
+      currentDualQ: 0,
+      isTransitioning: false,
+      pendingAfterUnlock: 'quiz' // quiz | guestQuiz
+    };
+
+    function loadUnlockState() {
+      try {
+        state.unlocked = localStorage.getItem(STORAGE_UNLOCK_KEY) === '1';
+        state.isBoss = localStorage.getItem(STORAGE_BOSS_KEY) === '1';
+      } catch (e) {
+        state.unlocked = false;
+        state.isBoss = false;
+      }
+    }
+
+    function saveUnlockState(code, isBoss) {
+      state.unlocked = true;
+      if (isBoss) state.isBoss = true;
+      try {
+        localStorage.setItem(STORAGE_UNLOCK_KEY, '1');
+        localStorage.setItem(STORAGE_CODE_KEY, code);
+        if (isBoss) localStorage.setItem(STORAGE_BOSS_KEY, '1');
+      } catch (e) {
+        // 隐私模式无法写入时保持当前会话有效
+      }
+    }
+
+    // =========================================================================
+    // 6. 工具函数
+    // =========================================================================
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function generateDiagNo(code) {
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      return `FRD-2026-${code}-${rand}`;
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2300);
+    }
+
+    function copyText(text, successMsg) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-9999px';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (ok) {
+          showToast(successMsg || '已复制到剪贴板');
+          return;
+        }
+      } catch (e) {}
+      showToast('复制失败，请手动长按框内文字复制');
+    }
+
+    function openModal(html) {
+      const backdrop = document.getElementById('modal-backdrop');
+      const panel = document.getElementById('modal-panel');
+      panel.innerHTML = html;
+      backdrop.classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-backdrop').classList.remove('open');
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'modal-backdrop') closeModal();
+    }
+
+    // 生成带 ?mode=duo&hostName=...&hostType=... 的免费合盘链接
+    function buildDuoUrl(hostName, hostType) {
+      const base = window.location.href.split('?')[0];
+      const params = new URLSearchParams({
+        mode: 'duo',
+        hostName: hostName,
+        hostType: hostType
+      });
+      return `${base}?${params.toString()}`;
+    }
+
+    // 计算单人结果
+    function computeSingleResult() {
+      const counts = { A: 0, B: 0, X: 0, Y: 0, '1': 0, '2': 0 };
+      state.answers.forEach(p => { if (counts[p] !== undefined) counts[p]++; });
+      state.axisCounts = counts;
+      const d = counts.A >= 3 ? 'A' : 'B';
+      const c = counts.X >= 3 ? 'X' : 'Y';
+      const r = counts['1'] >= 3 ? '1' : '2';
+      state.resultCode = `${d}${c}${r}`;
+      state.diagNo = generateDiagNo(state.resultCode);
+    }
+
+    // 计算双人合盘结果（6 组专属 + 4 套三轴重合度通用模板）
+    function computeDualReport(codeA, codeB, trustTag, survivalPick) {
+      const pairKey = [codeA, codeB].sort().join('-');
+      let base;
+
+      if (SIGNATURE_PAIRS[pairKey]) {
+        base = { ...SIGNATURE_PAIRS[pairKey] };
+      } else {
+        const dSame = codeA[0] === codeB[0];
+        const cSame = codeA[1] === codeB[1];
+        const rSame = codeA[2] === codeB[2];
+        const sameCount = (dSame ? 1 : 0) + (cSame ? 1 : 0) + (rSame ? 1 : 0);
+
+        if (sameCount === 3) {
+          base = {
+            stamp: '照镜子发疯局',
+            survivalBase: 86,
+            coldWarBase: 42,
+            crazyBase: 95,
+            diagnosis: '你俩简直是一个模子刻出来的！开心时能凑一块儿把天聊塌，一旦触发共同雷区，要不一起原地爆炸，要不一起进入静音微死状态。',
+            victim: '你们身边的其他朋友最委屈，完全插不进你俩的脑电波。',
+            bottomLine: '互相多给对方留一点容错率，别跟另一个自己较真。'
+          };
+        } else if (sameCount === 0) {
+          base = {
+            stamp: '跨物种社交奇迹',
+            survivalBase: 46,
+            coldWarBase: 82,
+            crazyBase: 68,
+            diagnosis: '相处距离、冲突应对、情绪雷达三个维度全反！真不知道你俩当初到底是怎么玩到一块儿去的，堪称人类友谊史上的未解之谜。',
+            victim: '两个人都觉得对方是外星人，偶尔互相气到心梗。',
+            bottomLine: '求同存异，记住对方不是故意气你，只是出厂设置完全相反。'
+          };
+        } else if (dSame && !cSame) {
+          base = {
+            stamp: '一个开麦一个静音局',
+            survivalBase: 66,
+            coldWarBase: 74,
+            crazyBase: 76,
+            diagnosis: '平时相处距离挺合拍，唯一的大 Bug 出在吵架时：一个恨不得当场拉横幅把话讲透，另一个已经礼貌微笑准备悄悄退场。',
+            victim: '静音的那个憋着一肚子话，开麦的那个一拳打在棉花上。',
+            bottomLine: '有矛盾时，开麦方降一半音量，静音方至少说出一句真话。'
+          };
+        } else {
+          base = {
+            stamp: '节奏错位拉扯局',
+            survivalBase: 62,
+            coldWarBase: 66,
+            crazyBase: 72,
+            diagnosis: '三观底色其实挺合拍，但一个想天天贴贴分享日常，一个想平时散养有事再摇。感情没问题，纯属社交充电频率不同步。',
+            victim: '黏人的那个总觉得自己被冷落，散养的那个总觉得压力山大。',
+            bottomLine: '提前对齐联络频率，别用回消息的速度来丈量感情深浅。'
+          };
+        }
+      }
+
+      const clamp = (n) => Math.max(5, Math.min(99, Math.round(n)));
+      const survivalShift = survivalPick === '99' ? 8 : -16;
+      const trustColdShift = trustTag === '过命交情' ? -9 : 12;
+      const trustCrazyShift = trustTag === '过命交情' ? 7 : -6;
+
+      return {
+        ...base,
+        survival: clamp(base.survivalBase + survivalShift),
+        coldWar: clamp(base.coldWarBase + trustColdShift),
+        crazy: clamp(base.crazyBase + trustCrazyShift)
+      };
+    }
+
+    // =========================================================================
+    // 7. 视图渲染
+    // =========================================================================
+    function render() {
+      const root = document.getElementById('app-root');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      switch (state.view) {
+        case 'home': root.innerHTML = renderHome(); break;
+        case 'quiz': root.innerHTML = renderQuiz(); break;
+        case 'result': root.innerHTML = renderResult(); break;
+        case 'dualIntro': root.innerHTML = renderDualIntro(); break;
+        case 'dualQuiz': root.innerHTML = renderDualQuiz(); break;
+        case 'dualResult': root.innerHTML = renderDualResult(); break;
+        case 'gallery': root.innerHTML = renderGallery(); break;
+      }
+    }
+
+    function renderHome() {
+      return `
+        <div class="animate-in stack-md">
+          <div class="top-bar">
+            <span class="badge badge-ink font-mono">SBTI · 友谊急诊科</span>
+            ${state.unlocked
+              ? `<span class="badge badge-mint">✓ 已解锁完整版</span>`
+              : `<span class="badge">VOL.2026 正式版</span>`
+            }
+          </div>
+
+          <div class="neo-card">
+            <div class="stamp-circle" style="top:-6px; right:-6px; width:76px; height:76px;">
+              <span class="st-top">小红书爆火</span>
+              <span class="st-mid" style="font-size:12px;">急诊版</span>
+              <span class="st-bot">15题确诊</span>
+            </div>
+
+            <div class="badge badge-yellow" style="margin-bottom:10px;">🔥 扎心嘴替 · 支持免费好友合盘</div>
+
+            <h1 style="font-size:28px; font-weight:900; line-height:1.22; padding-right:54px;">
+              友谊相处模式<br/>
+              <span style="display:inline-block; margin-top:4px; padding:1px 8px; background:var(--yellow); border:2px solid var(--ink);">确诊测试</span>
+            </h1>
+
+            <p style="margin-top:12px; font-size:13.5px; font-weight:600; color:#3F3F46; line-height:1.65;">
+              测测你在友情里到底是<strong style="color:var(--ink); text-decoration:underline; text-decoration-color:var(--red); text-decoration-thickness:2px;">「微死感体面判官」</strong>，还是<strong style="color:var(--ink); text-decoration:underline; text-decoration-color:var(--mint); text-decoration-thickness:3px;">「半年诈尸卡皮巴拉」</strong>？
+            </p>
+
+            <div class="tag-wrap" style="margin-top:12px;">
+              <span class="badge" style="background:#FEF9C3;">🍋 嘴硬心碎大醋精</span>
+              <span class="badge" style="background:#E0F2FE;">⚖️ 微死感体面判官</span>
+              <span class="badge" style="background:#DCFCE7;">⚡ 已读乱回反内耗王</span>
+              <span class="badge" style="background:#EDE9FE;">🕶️ 冷血反矫情达人</span>
+              <span class="badge" style="background:#FCE7F3;">🪫 社交已死顶级淡人</span>
+            </div>
+
+            <div style="margin-top:18px; padding-top:14px; border-top:2px dashed rgba(24,24,27,0.22);">
+              <label for="home-nickname" style="display:block; font-size:12px; font-weight:900; margin-bottom:7px;">
+                填写受检人昵称（选填，将印在确诊单上）
+              </label>
+              <input
+                id="home-nickname"
+                class="neo-input"
+                type="text"
+                maxlength="12"
+                value="${escapeHtml(state.userName)}"
+                placeholder="例如：暴躁小美（默认：神秘搭子）"
+                oninput="state.userName = this.value"
+              />
+            </div>
+
+            <button
+              class="neo-btn btn-yellow"
+              style="margin-top:14px; padding:15px;"
+              onclick="handleStartSingleClick()"
+            >
+              <span>${state.unlocked ? '开始单人确诊测试（15题）→' : '🔒 开始单人确诊测试（15题）'}</span>
+            </button>
+
+            <div style="margin-top:10px; text-align:center; font-size:11.5px; font-weight:700; color:var(--ink-muted);">
+              ${state.unlocked
+                ? '本设备已解锁 · 可无限次重测并邀请好友免费合盘'
+                : '小红书订单自动发货 6 位兑换码即可解锁 · 解锁后永久有效'
+              }
+            </div>
+          </div>
+
+          ${state.isBoss ? `
+            <div class="neo-card" style="background:#FEFCE8; padding:14px;">
+              <div style="font-size:11px; font-weight:900; color:var(--red); margin-bottom:8px;">👑 店长权限已激活（普通买家不可见）</div>
+              <button class="neo-btn btn-ink" style="font-size:13px; padding:11px;" onclick="openGallery()">
+                🗂️ 店长专属：预览 8 种人格图鉴（截图做封面用）
+              </button>
+            </div>
+          ` : ''}
+
+          <p style="text-align:center; font-size:11px; font-weight:600; color:#71717A; padding-top:4px;">
+            仅供娱乐与好友互怼 · 如有扎心纯属真实写照
+          </p>
+        </div>
+      `;
+    }
+
+    function renderQuiz() {
+      const q = SINGLE_QUESTIONS[state.currentQ];
+      const pct = Math.round(((state.currentQ + 1) / SINGLE_QUESTIONS.length) * 100);
+      const picked = state.answers[state.currentQ];
+
+      return `
+        <div class="animate-in">
+          <div class="top-bar">
+            <button class="neo-btn neo-btn-sm" onclick="prevSingleQ()">
+              ← ${state.currentQ === 0 ? '回首页' : '上一题'}
+            </button>
+            <span class="badge badge-ink font-mono" style="font-size:13px; padding:5px 10px;">
+              ${String(state.currentQ + 1).padStart(2, '0')} / ${SINGLE_QUESTIONS.length}
+            </span>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-fill" style="width:${pct}%;"></div>
+          </div>
+
+          <div class="neo-card stack-md">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="badge badge-yellow">场景诊断 Q${q.id}</span>
+              <span style="font-size:12px; font-weight:700; color:var(--ink-muted);">凭第一直觉选最扎心的那个</span>
+            </div>
+
+            <h2 style="font-size:16.5px; font-weight:900; line-height:1.6;">
+              ${q.text}
+            </h2>
+
+            <div class="stack-sm">
+              ${q.options.map((opt, idx) => `
+                <button
+                  id="sq-opt-${idx}"
+                  class="option-btn ${picked === opt.pole ? 'selected' : ''}"
+                  onclick="selectSingleOption('${opt.pole}', ${idx})"
+                >
+                  <span class="option-letter font-mono">${opt.label}</span>
+                  <span class="option-text">${opt.text}</span>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <p style="text-align:center; font-size:11.5px; font-weight:700; color:#71717A; margin-top:12px;">
+            点击选项自动进入下一题 · 可随时返回修改
+          </p>
+        </div>
+      `;
+    }
+
+    function renderAxisBar(leftText, rightText, leftPct, color) {
+      const rightPct = 100 - leftPct;
+      return `
+        <div class="axis-row">
+          <div class="axis-labels">
+            <span style="color:${leftPct >= 50 ? 'var(--ink)' : '#A1A1AA'}">${leftText} ${leftPct}%</span>
+            <span style="color:${leftPct < 50 ? 'var(--ink)' : '#A1A1AA'}">${rightPct}% ${rightText}</span>
+          </div>
+          <div class="axis-track">
+            <div class="axis-fill" style="width:${leftPct}%; background:${color};"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderResult() {
+      const p = PERSONALITIES[state.resultCode];
+      const name = state.userName.trim() || '神秘搭子';
+      const pctA = Math.round((state.axisCounts.A / 5) * 100);
+      const pctX = Math.round((state.axisCounts.X / 5) * 100);
+      const pct1 = Math.round((state.axisCounts['1'] / 5) * 100);
+
+      return `
+        <div class="animate-in stack-md">
+          <div class="top-bar">
+            <span class="badge badge-ink">📸 截屏保存发小红书晒图</span>
+            <button class="text-link" onclick="goHome()">返回首页</button>
+          </div>
+
+          <!-- 竖版《友谊确诊单》海报 -->
+          <div class="neo-card">
+            <!-- 抬头 -->
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid var(--ink); padding-bottom:10px;">
+              <div>
+                <div class="font-mono" style="font-size:10px; font-weight:900; letter-spacing:1px; color:var(--ink-muted);">ADULT FRIENDSHIP DIAGNOSIS</div>
+                <div style="font-size:18px; font-weight:900;">成年人友谊确诊单</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:10px; font-weight:700; color:var(--ink-muted);">受检人</div>
+                <div class="badge badge-yellow" style="max-width:115px; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(name)}</div>
+              </div>
+            </div>
+
+            <!-- 倾斜红色「已确诊」印章 -->
+            <div class="stamp-circle animate-stamp">
+              <span class="st-top">友谊急诊</span>
+              <span class="st-mid">已确诊</span>
+              <span class="st-bot font-mono">${p.code}</span>
+            </div>
+
+            <!-- 人格标题与占比 -->
+            <div style="margin-top:14px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="badge badge-ink font-mono">TYPE · ${p.code}</span>
+                <span style="font-size:12px; font-weight:900; color:var(--red);">全网占比 ${p.ratio}</span>
+              </div>
+
+              <div style="display:inline-flex; align-items:center; gap:8px; padding:7px 13px; border:2px solid var(--ink); box-shadow:var(--shadow-sm); border-radius:12px; background:${p.bg};">
+                <span style="font-size:24px; line-height:1;">${p.emoji}</span>
+                <h1 style="font-size:22px; font-weight:900; line-height:1.2;">${p.name}</h1>
+              </div>
+
+              <div class="tag-wrap" style="margin-top:10px;">
+                ${p.keywords.map(k => `<span class="badge"># ${k}</span>`).join('')}
+              </div>
+            </div>
+
+            <!-- 扎心诊断引用块 -->
+            <div class="quote-box" style="margin-top:14px;">
+              <div style="font-size:11px; font-weight:900; color:var(--red); margin-bottom:4px;">🩺 扎心诊断</div>
+              <p style="font-size:13.5px; font-weight:800; line-height:1.6;">${p.diagnosis}</p>
+            </div>
+
+            <!-- 三轴能量条 -->
+            <div class="neo-subcard" style="margin-top:12px;">
+              <div style="font-size:11px; font-weight:900; color:var(--ink-muted); margin-bottom:8px;">三轴临床能量条</div>
+              ${renderAxisBar('深度绑定', '低耗散养', pctA, '#F472B6')}
+              ${renderAxisBar('直球摊牌', '静音退场', pctX, '#FACC15')}
+              ${renderAxisBar('高敏读心', '钝感大条', pct1, '#38BDF8')}
+            </div>
+
+            <!-- 发疯日常列表 -->
+            <div style="margin-top:14px;" class="stack-sm">
+              <div style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:900;">
+                <span class="badge badge-ink" style="font-size:10px; padding:2px 6px;">症状表现</span>
+                <span>你的发疯日常</span>
+              </div>
+              ${p.daily.map(item => `
+                <div class="neo-subcard">
+                  <div style="font-size:12.5px; font-weight:900; margin-bottom:3px;">▪ ${item.title}</div>
+                  <p style="font-size:12px; font-weight:500; color:#3F3F46; line-height:1.6;">${item.desc}</p>
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- 天选搭子 / 内耗冤家对比框 -->
+            <div class="grid-2" style="margin-top:12px;">
+              <div class="neo-subcard" style="background:#ECFDF5;">
+                <span class="badge badge-mint" style="font-size:10px; margin-bottom:6px;">💖 天选搭子</span>
+                <div style="font-size:12.5px; font-weight:900;">${p.bestMatch.name}</div>
+                <p style="font-size:11px; color:#3F3F46; margin-top:4px; line-height:1.45;">${p.bestMatch.desc}</p>
+              </div>
+              <div class="neo-subcard" style="background:#FEF2F2;">
+                <span class="badge badge-red" style="font-size:10px; margin-bottom:6px;">💣 内耗冤家</span>
+                <div style="font-size:12.5px; font-weight:900;">${p.worstMatch.name}</div>
+                <p style="font-size:11px; color:#3F3F46; margin-top:4px; line-height:1.45;">${p.worstMatch.desc}</p>
+              </div>
+            </div>
+
+            <!-- 防崩处方 -->
+            <div class="rx-box" style="margin-top:12px;">
+              <div style="font-size:11px; font-weight:900; color:var(--yellow); margin-bottom:4px;">💊 友谊防崩处方</div>
+              <p style="font-size:12px; font-weight:500; line-height:1.6; opacity:0.95;">${p.prescription}</p>
+            </div>
+
+            <!-- 底部条形码装饰 -->
+            <div class="ticket-divider">
+              <div>
+                <div class="font-mono" style="font-size:9.5px; font-weight:800; color:var(--ink-muted);">DIAGNOSIS NO.</div>
+                <div class="font-mono" style="font-size:11px; font-weight:900;">${state.diagNo}</div>
+              </div>
+              <div class="barcode"></div>
+            </div>
+          </div>
+
+          <!-- 底部免费好友双人合盘操作区 -->
+          <div class="stack-sm">
+            <button class="neo-btn btn-pink" onclick="copyDuoInviteLink()">
+              🔗 复制专属链接，邀搭子免费合盘
+            </button>
+            <button class="neo-btn btn-mint" onclick="simulateDuoFromResult()">
+              🎭 单机模拟体验好友 5 题合盘
+            </button>
+            <div class="grid-2">
+              <button class="neo-btn btn-yellow" style="font-size:12.5px; padding:11px;" onclick="copyXhsShareText()">
+                📋 复制晒图战报
+              </button>
+              <button class="neo-btn" style="font-size:12.5px; padding:11px;" onclick="startSingleQuiz()">
+                🔄 重测一次
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 好友免费合盘欢迎页（完全绕过兑换码） ---
+    function renderDualIntro() {
+      const hostP = PERSONALITIES[state.dualHost.code] || PERSONALITIES.AY1;
+      return `
+        <div class="animate-in stack-md">
+          <div class="top-bar">
+            <span class="badge badge-mint">FREE · 好友双人合盘免费</span>
+            <button class="text-link" onclick="goHome()">返回首页</button>
+          </div>
+
+          <div class="neo-card stack-md">
+            <span class="badge badge-yellow">💌 你收到一份友谊合盘邀请</span>
+
+            <div class="neo-subcard" style="display:flex; align-items:center; gap:12px;">
+              <div style="width:50px; height:50px; border:2px solid var(--ink); border-radius:12px; background:${hostP.bg}; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;">
+                ${hostP.emoji}
+              </div>
+              <div>
+                <div style="font-size:12px; font-weight:700; color:var(--ink-muted);">
+                  你的搭子 <strong style="color:var(--ink);">【${escapeHtml(state.dualHost.name)}】</strong> 已确诊：
+                </div>
+                <div style="font-size:17px; font-weight:900; margin-top:2px;">${hostP.name}</div>
+              </div>
+            </div>
+
+            <p style="font-size:13.5px; font-weight:700; color:#3F3F46; line-height:1.65;">
+              Ta 邀请你做 <span style="background:var(--mint); padding:1px 5px; border:1px solid var(--ink);">5 道极速测谎题（完全免费 · 30秒）</span>，立刻生成你俩的《双人友谊确诊单》，测测旅游存活率和谁在偷偷受委屈！
+            </p>
+
+            <div>
+              <label for="duo-guest-name" style="display:block; font-size:12px; font-weight:900; margin-bottom:6px;">
+                输入你的昵称（将印在双人确诊单上）
+              </label>
+              <input
+                id="duo-guest-name"
+                class="neo-input"
+                type="text"
+                maxlength="12"
+                value="${escapeHtml(state.dualGuest.name)}"
+                placeholder="例如：熬夜冠军（默认：嘴替搭子）"
+                oninput="state.dualGuest.name = this.value"
+              />
+            </div>
+
+            <button class="neo-btn btn-mint" style="padding:15px;" onclick="startDualQuiz()">
+              免费开始 5 题双人合盘 →
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 好友免费 5 题合盘答题页 ---
+    function renderDualQuiz() {
+      const q = DUAL_QUESTIONS[state.currentDualQ];
+      const pct = Math.round(((state.currentDualQ + 1) / DUAL_QUESTIONS.length) * 100);
+      const picked = state.dualAnswers[state.currentDualQ];
+
+      return `
+        <div class="animate-in">
+          <div class="top-bar">
+            <button class="neo-btn neo-btn-sm" onclick="prevDualQ()">
+              ← ${state.currentDualQ === 0 ? '返回' : '上一题'}
+            </button>
+            <span class="badge badge-ink font-mono" style="font-size:13px; padding:5px 10px;">
+              合盘 ${state.currentDualQ + 1} / ${DUAL_QUESTIONS.length}
+            </span>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-fill" style="width:${pct}%; background:var(--pink);"></div>
+          </div>
+
+          <div class="neo-card stack-md">
+            <span class="badge badge-mint">双人默契测谎 H${q.id}</span>
+
+            <h2 style="font-size:16.5px; font-weight:900; line-height:1.6;">
+              ${q.getText(escapeHtml(state.dualHost.name))}
+            </h2>
+
+            <div class="stack-sm">
+              ${q.options.map((opt, idx) => `
+                <button
+                  id="dq-opt-${idx}"
+                  class="option-btn ${picked === opt.value ? 'selected' : ''}"
+                  onclick="selectDualOption('${opt.value}', ${idx})"
+                >
+                  <span class="option-letter font-mono">${opt.label}</span>
+                  <span class="option-text">${opt.text}</span>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 《双人友谊确诊单》结果页 ---
+    function renderDualResult() {
+      const hostP = PERSONALITIES[state.dualHost.code] || PERSONALITIES.AY1;
+      const guestP = PERSONALITIES[state.dualGuest.code] || PERSONALITIES.BX1;
+      const hostName = state.dualHost.name.trim() || '神秘搭子';
+      const guestName = state.dualGuest.name.trim() || '嘴替搭子';
+      const report = computeDualReport(
+        hostP.code,
+        guestP.code,
+        state.dualGuest.trustTag,
+        state.dualGuest.survivalPick
+      );
+      const cpNo = `CP-${hostP.code}X${guestP.code}-${Math.floor(100 + Math.random() * 899)}`;
+
+      return `
+        <div class="animate-in stack-md">
+          <div class="top-bar">
+            <span class="badge badge-ink">📸 截图甩给你的搭子对峙</span>
+            <button class="text-link" onclick="goHome()">返回首页</button>
+          </div>
+
+          <div class="neo-card">
+            <div style="text-align:center; border-bottom:2px solid var(--ink); padding-bottom:10px;">
+              <div class="font-mono" style="font-size:10px; font-weight:900; letter-spacing:1px; color:var(--ink-muted);">DUAL FRIENDSHIP REPORT</div>
+              <h1 style="font-size:19px; font-weight:900; margin-top:2px;">《双人友谊确诊单》</h1>
+            </div>
+
+            <!-- 双人并列 -->
+            <div class="dual-vs" style="margin-top:14px;">
+              <div style="border:2px solid var(--ink); border-radius:12px; padding:10px 8px; text-align:center; background:${hostP.bg};">
+                <div class="badge" style="font-size:10px; max-width:100%; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(hostName)}</div>
+                <div style="font-size:26px; margin:4px 0;">${hostP.emoji}</div>
+                <div style="font-size:12px; font-weight:900; line-height:1.3;">${hostP.name}</div>
+              </div>
+              <div class="font-mono" style="font-size:20px; font-weight:900;">×</div>
+              <div style="border:2px solid var(--ink); border-radius:12px; padding:10px 8px; text-align:center; background:${guestP.bg};">
+                <div class="badge" style="font-size:10px; max-width:100%; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(guestName)}</div>
+                <div style="font-size:26px; margin:4px 0;">${guestP.emoji}</div>
+                <div style="font-size:12px; font-weight:900; line-height:1.3;">${guestP.name}</div>
+              </div>
+            </div>
+
+            <!-- 核心关系印章 -->
+            <div style="text-align:center; margin-top:16px;">
+              <div class="stamp-rect">
+                <div class="font-mono" style="font-size:9.5px; font-weight:900; letter-spacing:1px;">RELATIONSHIP VERDICT</div>
+                <div style="font-size:17px; font-weight:900; margin-top:2px;">【${report.stamp}】</div>
+              </div>
+            </div>
+
+            <!-- 彩蛋标签 -->
+            <div class="tag-wrap" style="justify-content:center; margin-top:14px;">
+              <span class="badge badge-yellow">深夜两点：${state.dualGuest.trustTag}</span>
+              <span class="badge">5天自由行：${state.dualGuest.survivalPick === '99' ? '神仙搭子不翻车' : '第4天想提前回国'}</span>
+            </div>
+
+            <!-- 三项扎心数值 -->
+            <div class="neo-subcard" style="margin-top:14px;">
+              ${renderMetricRow('✈️ 旅游存活率', report.survival, report.survival >= 70 ? '#34D399' : '#F472B6')}
+              ${renderMetricRow('🧊 吵架冷战值', report.coldWar, report.coldWar >= 70 ? '#EF4444' : '#FACC15')}
+              ${renderMetricRow('🤪 共同发疯指数', report.crazy, '#38BDF8')}
+            </div>
+
+            <!-- 毒舌合盘诊断 -->
+            <div class="quote-box" style="margin-top:12px;">
+              <div style="font-size:11.5px; font-weight:900; color:var(--red); margin-bottom:4px;">🔥 毒舌合盘诊断</div>
+              <p style="font-size:12.5px; font-weight:700; line-height:1.6;">${report.diagnosis}</p>
+            </div>
+
+            <!-- 谁在偷偷受委屈 & 防崩底线 -->
+            <div class="stack-sm" style="margin-top:10px;">
+              <div class="neo-subcard">
+                <div style="font-size:11px; font-weight:900; color:var(--ink-muted); margin-bottom:3px;">🥺 谁在偷偷受委屈？</div>
+                <p style="font-size:12.5px; font-weight:800; line-height:1.55;">${report.victim}</p>
+              </div>
+              <div class="rx-box">
+                <div style="font-size:11px; font-weight:900; color:var(--mint); margin-bottom:3px;">🛡️ 双人防崩底线</div>
+                <p style="font-size:12px; font-weight:500; line-height:1.55; opacity:0.95;">${report.bottomLine}</p>
+              </div>
+            </div>
+
+            <div class="ticket-divider">
+              <span class="font-mono" style="font-size:10.5px; font-weight:900; color:var(--ink-muted);">${cpNo}</span>
+              <div class="barcode"></div>
+            </div>
+          </div>
+
+          <!-- 好友转化钩子：解锁完整单人防崩报告 -->
+          <div class="neo-card" style="background:#FEF9C3;">
+            <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:12px;">
+              <span style="font-size:24px; line-height:1;">🔓</span>
+              <div>
+                <div style="font-size:14px; font-weight:900;">你被初筛为【${guestP.name}】</div>
+                <p style="font-size:12px; font-weight:600; color:#3F3F46; margin-top:3px; line-height:1.5;">
+                  合盘仅剧透简要称号，解锁你的完整 15 题深度测评、发疯日常、内耗冤家及专属防崩处方！
+                </p>
+              </div>
+            </div>
+            <button class="neo-btn btn-red" onclick="handleGuestUnlockClick()">
+              解锁我的完整单人防崩报告 →
+            </button>
+          </div>
+
+          <button class="neo-btn" style="font-size:13px; padding:12px;" onclick="copyDualShareText()">
+            📋 复制双人吐槽战报发朋友圈 / 微信群
+          </button>
+        </div>
+      `;
+    }
+
+    function renderMetricRow(label, val, color) {
+      return `
+        <div class="axis-row">
+          <div class="axis-labels">
+            <span>${label}</span>
+            <span class="font-mono">${val}%</span>
+          </div>
+          <div class="axis-track" style="height:11px;">
+            <div class="axis-fill" style="width:${val}%; background:${color};"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 店长专属 8 种人格图鉴 ---
+    function renderGallery() {
+      const list = Object.values(PERSONALITIES);
+      return `
+        <div class="animate-in stack-md">
+          <div class="top-bar">
+            <button class="neo-btn neo-btn-sm" onclick="goHome()">← 返回首页</button>
+            <span class="badge badge-ink">👑 店长图鉴（8 种人格）</span>
+          </div>
+
+          <div class="stack-sm">
+            ${list.map(p => `
+              <button
+                class="option-btn"
+                style="align-items:center;"
+                onclick="previewBossCard('${p.code}')"
+              >
+                <div style="width:46px; height:46px; border:2px solid var(--ink); border-radius:10px; background:${p.bg}; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;">
+                  ${p.emoji}
+                </div>
+                <div style="flex:1; min-width:0;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; gap:6px;">
+                    <span style="font-size:15px; font-weight:900;">${p.name}</span>
+                    <span class="badge badge-ink font-mono" style="font-size:10px;">${p.code} · ${p.ratio}</span>
+                  </div>
+                  <div style="font-size:11.5px; color:var(--ink-muted); margin-top:4px;">点击进入高清确诊单截图 →</div>
+                </div>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 8. 兑换码弹窗与校验逻辑
+    // =========================================================================
+    function openRedeemModal(afterAction) {
+      state.pendingAfterUnlock = afterAction || 'quiz';
+      openModal(`
+        <div class="stack-md">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="badge badge-yellow">🔑 输入兑换码解锁测试</span>
+            <button class="neo-btn neo-btn-sm" style="padding:4px 9px;" onclick="closeModal()">✕</button>
+          </div>
+
+          <p style="font-size:13px; font-weight:700; color:#3F3F46; line-height:1.6;">
+            请输入小红书订单自动发货的 <strong>6 位兑换码</strong>解锁完整单人确诊报告（解锁后本设备可重复测试，并可无限次邀请搭子免费双人合盘）。
+          </p>
+
+          <div>
+            <input
+              id="redeem-input"
+              class="neo-input font-mono"
+              style="text-transform:uppercase; letter-spacing:2px; font-size:16px; text-align:center;"
+              type="text"
+              maxlength="16"
+              placeholder="请输入 6 位兑换码"
+              onkeydown="if(event.key==='Enter') submitRedeemCode()"
+            />
+            <div id="redeem-error" class="error-msg">兑换码无效，请检查是否输入正确</div>
+          </div>
+
+          <button class="neo-btn btn-yellow" onclick="submitRedeemCode()">
+            立即验证并解锁 →
+          </button>
+
+          <div style="background:#FFFFFF; border:1.5px dashed rgba(24,24,27,0.35); border-radius:10px; padding:10px; font-size:11.5px; font-weight:600; color:var(--ink-muted); line-height:1.55;">
+            💡 还没有兑换码？请前往小红书原笔记左下角小店拍下 <strong>0.99 元</strong>测试商品，系统将自动发送专属兑换码。
+          </div>
+        </div>
+      `);
+      setTimeout(() => {
+        const input = document.getElementById('redeem-input');
+        if (input) input.focus();
+      }, 60);
+    }
+
+    function submitRedeemCode() {
+      const input = document.getElementById('redeem-input');
+      const errEl = document.getElementById('redeem-error');
+      if (!input) return;
+
+      const raw = input.value.trim().toUpperCase();
+      const isBoss = raw === BOSS_CODE;
+      const isValid = isBoss || VALID_CODES.has(raw);
+
+      if (!isValid) {
+        input.classList.remove('shake-error');
+        void input.offsetWidth; // 强制重绘以重复触发抖动动画
+        input.classList.add('shake-error');
+        if (errEl) errEl.classList.add('show');
+        return;
+      }
+
+      saveUnlockState(raw, isBoss);
+      closeModal();
+
+      if (isBoss) {
+        showToast('👑 店长专用码已解锁！已开启首页 8 人格图鉴');
+      } else {
+        showToast('🎉 解锁成功！开始你的 15 题友谊确诊');
+      }
+
+      if (state.pendingAfterUnlock === 'guestQuiz') {
+        if (state.dualGuest.name.trim()) {
+          state.userName = state.dualGuest.name.trim();
+        }
+      }
+      startSingleQuiz();
+    }
+
+    // =========================================================================
+    // 9. 页面交互事件处理
+    // =========================================================================
+    function goHome() {
+      state.view = 'home';
+      render();
+    }
+
+    function handleStartSingleClick() {
+      if (state.unlocked) {
+        startSingleQuiz();
+      } else {
+        openRedeemModal('quiz');
+      }
+    }
+
+    function handleGuestUnlockClick() {
+      if (state.unlocked) {
+        if (state.dualGuest.name.trim()) state.userName = state.dualGuest.name.trim();
+        startSingleQuiz();
+      } else {
+        openRedeemModal('guestQuiz');
+      }
+    }
+
+    function startSingleQuiz() {
+      state.answers = [];
+      state.currentQ = 0;
+      state.view = 'quiz';
+      render();
+    }
+
+    function prevSingleQ() {
+      if (state.currentQ === 0) {
+        goHome();
+      } else {
+        state.currentQ--;
+        render();
+      }
+    }
+
+    function selectSingleOption(pole, idx) {
+      if (state.isTransitioning) return;
+      state.isTransitioning = true;
+      state.answers[state.currentQ] = pole;
+
+      const btn = document.getElementById(`sq-opt-${idx}`);
+      if (btn) btn.classList.add('selected');
+
+      setTimeout(() => {
+        state.isTransitioning = false;
+        if (state.currentQ < SINGLE_QUESTIONS.length - 1) {
+          state.currentQ++;
+          render();
+        } else {
+          computeSingleResult();
+          state.view = 'result';
+          render();
+        }
+      }, 200);
+    }
+
+    function copyDuoInviteLink() {
+      const hostName = state.userName.trim() || '神秘搭子';
+      const p = PERSONALITIES[state.resultCode];
+      const url = buildDuoUrl(hostName, p.code);
+      const msg = `救命！我刚测出我在友情里居然是【${p.name}】😂\n快来免费跟我做 5 题双人合盘，测测咱俩旅游存活率有多高👉 ${url}`;
+      copyText(msg, '专属合盘链接与邀请文案已复制，快发给微信搭子！');
+    }
+
+    function simulateDuoFromResult() {
+      state.dualHost = {
+        name: state.userName.trim() || '神秘搭子',
+        code: state.resultCode
+      };
+      state.dualGuest = { name: '', code: 'BX1', trustTag: '过命交情', survivalPick: '99' };
+      state.dualAnswers = [];
+      state.currentDualQ = 0;
+      state.view = 'dualIntro';
+      render();
+    }
+
+    function startDualQuiz() {
+      state.dualAnswers = [];
+      state.currentDualQ = 0;
+      state.view = 'dualQuiz';
+      render();
+    }
+
+    function prevDualQ() {
+      if (state.currentDualQ === 0) {
+        state.view = 'dualIntro';
+        render();
+      } else {
+        state.currentDualQ--;
+        render();
+      }
+    }
+
+    function selectDualOption(val, idx) {
+      if (state.isTransitioning) return;
+      state.isTransitioning = true;
+      state.dualAnswers[state.currentDualQ] = val;
+
+      const btn = document.getElementById(`dq-opt-${idx}`);
+      if (btn) btn.classList.add('selected');
+
+      setTimeout(() => {
+        state.isTransitioning = false;
+        if (state.currentDualQ < DUAL_QUESTIONS.length - 1) {
+          state.currentDualQ++;
+          render();
+        } else {
+          state.dualGuest.code = `${state.dualAnswers[0]}${state.dualAnswers[1]}${state.dualAnswers[2]}`;
+          state.dualGuest.trustTag = state.dualAnswers[3];
+          state.dualGuest.survivalPick = state.dualAnswers[4];
+          state.view = 'dualResult';
+          render();
+        }
+      }, 200);
+    }
+
+    function openGallery() {
+      if (!state.isBoss) return;
+      state.view = 'gallery';
+      render();
+    }
+
+    function previewBossCard(code) {
+      state.resultCode = code;
+      state.diagNo = generateDiagNo(code);
+      state.axisCounts = {
+        A: code[0] === 'A' ? 4 : 1,
+        B: code[0] === 'B' ? 4 : 1,
+        X: code[1] === 'X' ? 4 : 1,
+        Y: code[1] === 'Y' ? 4 : 1,
+        '1': code[2] === '1' ? 4 : 1,
+        '2': code[2] === '2' ? 4 : 1
+      };
+      state.view = 'result';
+      render();
+    }
+
+    function copyXhsShareText() {
+      const p = PERSONALITIES[state.resultCode];
+      const text = `刚刚测了《友谊相处模式确诊测试》，我居然被确诊为【${p.name}】（全网占比 ${p.ratio}）${p.emoji}\n扎心诊断：${p.diagnosis}\n天选搭子：${p.bestMatch.name} ｜ 内耗冤家：${p.worstMatch.name}\n#友谊确诊测试 #成年人的友谊 #搭子测试`;
+      copyText(text, '小红书晒图战报已复制！');
+    }
+
+    function copyDualShareText() {
+      const hostP = PERSONALITIES[state.dualHost.code];
+      const guestP = PERSONALITIES[state.dualGuest.code];
+      const hostName = state.dualHost.name.trim() || '神秘搭子';
+      const guestName = state.dualGuest.name.trim() || '嘴替搭子';
+      const report = computeDualReport(hostP.code, guestP.code, state.dualGuest.trustTag, state.dualGuest.survivalPick);
+      const text = `我和 ${hostName} 的《双人友谊确诊单》出炉了😂\n【${hostP.name}】×【${guestP.name}】\n关系确诊：【${report.stamp}】\n✈️ 旅游存活率：${report.survival}% ｜ 🧊 吵架冷战值：${report.coldWar}%\n🔥 毒舌诊断：${report.diagnosis}`;
+      copyText(text, '双人吐槽战报已复制！');
+    }
+
+    // =========================================================================
+    // 10. 启动初始化：读取本地解锁状态 & 检查免费好友合盘 URL 参数
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      loadUnlockState();
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const mode = params.get('mode');
+        const hostName = params.get('hostName');
+        const hostType = params.get('hostType');
+        if (mode === 'duo' && hostType && PERSONALITIES[hostType]) {
+          state.dualHost = {
+            name: hostName ? hostName.slice(0, 12) : '神秘搭子',
+            code: hostType
+          };
+          state.view = 'dualIntro';
+        }
+      } catch (e) {
+        // 忽略 URL 参数异常
+      }
+      render();
+    });
+  </script>
+</body>
+</html>
